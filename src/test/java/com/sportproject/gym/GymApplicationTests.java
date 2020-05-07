@@ -8,6 +8,7 @@ class GymApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.print("I am boomer");
 	}
 
 }
