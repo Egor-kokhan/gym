@@ -7,8 +7,9 @@ import java.util.Iterator;
 
 public class Test {
     public static void main(String[] args) {
+        System.out.println("Ну Егоооор");
         HashMap<String, String> map = new HashMap<>();
-        map.put("1", "1");
+        map.put("11", "1");
         map.put("2", "2");
         map.put("3", "3");
 
