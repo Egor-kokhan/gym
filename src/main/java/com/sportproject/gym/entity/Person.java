@@ -7,15 +7,6 @@ import javax.persistence.*;
 
 /**
  * @author Egor on 12.05.2020.
- *
- *  CREATE TABLE IF NOT EXISTS Person
- * (
- *     id           INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
- *     first_name   VARCHAR(50) NOT NULL COMMENT 'Имя',
- *     last_name    VARCHAR(50) COMMENT 'Фамилия',
- *     age          INTEGER     NOT NULL COMMENT 'Возраст',
- *     created_date DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата регистрации'
- * );
  */
 @Entity()
 @Data

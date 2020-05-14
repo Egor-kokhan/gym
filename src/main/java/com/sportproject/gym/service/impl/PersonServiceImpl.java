@@ -1,7 +1,8 @@
-package com.sportproject.gym.service;
+package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.entity.Person;
 import com.sportproject.gym.repository.PersonRepository;
+import com.sportproject.gym.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Egor on 12.05.2020.
  */
 @Service
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
 
     private PersonRepository repository;
 
