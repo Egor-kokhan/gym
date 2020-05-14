@@ -7,9 +7,9 @@ import javax.persistence.*;
 /**
  * @author Alex on 14.05.2020.
  */
-@Entity(name = "Exercise_type")
+@Entity()
 @Data
-public class ExerciseType {
+public class Gymnastic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
