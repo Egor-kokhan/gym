@@ -32,7 +32,6 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
-
     @GetMapping(value = "/age+5")
     public ResponseEntity<List<Person>> getMoreOlderPerson() {
         List<Person> persons = service.getAllMoreOlder();
