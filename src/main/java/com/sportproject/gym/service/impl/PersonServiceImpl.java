@@ -30,10 +30,31 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> getAllMoreOlder() {
         List<Person> persons = repository.findAll();
         for (Person person : persons) {
-            person.setAge(person.getAge()+5);
+            person.setAge(person.getAge() + 5);
         }
 
         return persons;
+    }
+
+    @Override
+    public void delete(long id) {
+        if (!repository.existsById(id)) {
+            System.out.println("Запись не найдена");
+        } else {
+            repository.deleteById(id);
+        }
+    }
+
+    @Override
+    public Person create(Person person) {
+        repository.save(person);
+        return person;
+    }
+
+    @Override
+    public Person update(Person person) {
+        repository.save(person);
+        return person;
     }
 
 }
