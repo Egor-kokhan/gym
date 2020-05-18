@@ -1,5 +1,6 @@
 package com.sportproject.gym.service.impl;
 
+import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Person;
 import com.sportproject.gym.repository.PersonRepository;
 import com.sportproject.gym.service.PersonService;
@@ -22,8 +23,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> getAll() {
-        return repository.findAll();
+    public List<PersonDTO> getAll() {
+        List<PersonDTO> persons = PersonDTO.mappingPersonToDTO(repository.findAll());
+        return persons;
     }
 
     @Override

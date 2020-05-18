@@ -1,5 +1,6 @@
 package com.sportproject.gym.controller;
 
+import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Person;
 import com.sportproject.gym.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class PersonController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Person>> getPerson() {
-        List<Person> persons = service.getAll();
+    public ResponseEntity<List<PersonDTO>> getAll() {
+        List<PersonDTO> persons = service.getAll();
         return ResponseEntity.ok(persons);
     }
 
