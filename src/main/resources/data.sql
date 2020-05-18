@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS Person;
+DROP TABLE IF EXISTS Person cascade ;
 CREATE TABLE IF NOT EXISTS Person
 (
     id           INTEGER AUTO_INCREMENT PRIMARY KEY COMMENT 'Уникальный идентификатор' ,
@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS Person
 COMMENT ON TABLE Person IS 'Пользователь';
 
 INSERT INTO Person (first_name, last_name, age) VALUES ('Egor', 'Kohan', 23);
-INSERT INTO Person (first_name, last_name, age) VALUES ('Sasha', 'Myagkov', 24);
+INSERT INTO Person (first_name, last_name, age) VALUES ('Alex', 'Myagkov', 24);
 
-DROP TABLE IF EXISTS Gymnastic;
+DROP TABLE IF EXISTS Gymnastic cascade;
 CREATE TABLE IF NOT EXISTS Gymnastic
 (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY COMMENT 'Уникальный идентификатор',
@@ -26,13 +26,21 @@ VALUES ( 'Приседание со штангой', 'Мы крч приседа
 INSERT INTO Gymnastic (name, description)
 VALUES ( 'Жим от груди', 'Мы крч лежим на скамье и опускаем штангу на грудь, а потом обратно поднимем');
 
--- DROP TABLE  Person_Exercise_type cascade;
--- CREATE TABLE Person_Exercise_type (
---                                       person_id INT,
---                                       exercise_type_id INT,
---                                       FOREIGN KEY (dick_id) references DICK(id),
---                                       FOREIGN KEY (pussy_id) references PUSSY(id)
--- );
+DROP TABLE  Person_Gymnastic;
+CREATE TABLE Person_Gymnastic (
+                      person_id INT,
+                      gymnastic_id INT,
+                      FOREIGN KEY (person_id) references Person(id),
+                      FOREIGN KEY (gymnastic_id) references Gymnastic(id)
+);
+
+INSERT INTO Person_Gymnastic (person_id, gymnastic_id)
+    VALUES ( select id from Person where first_name = 'Egor', select id from Gymnastic where name = 'Приседание со штангой');
+INSERT INTO Person_Gymnastic (person_id, gymnastic_id)
+    VALUES ( select id from Person where first_name = 'Egor', select id from Gymnastic where name = 'Жим от груди');
+INSERT INTO Person_Gymnastic (person_id, gymnastic_id)
+    VALUES ( select id from Person where first_name = 'Alex', select id from Gymnastic where name = 'Жим от груди');
+
 
 -- CREATE TABLE IF NOT EXISTS Exercise_one
 -- (
