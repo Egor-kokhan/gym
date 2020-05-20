@@ -1,5 +1,7 @@
 package com.sportproject.gym.service.impl;
 
+import com.sportproject.gym.DTO.GymnasticDTO;
+import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Gymnastic;
 import com.sportproject.gym.repository.GymnasticRepository;
 import com.sportproject.gym.service.GymnasticService;
@@ -22,8 +24,8 @@ public class GymnasticServiceImpl implements GymnasticService {
     }
 
     @Override
-    public List<Gymnastic> getAll() {
-        return repository.findAll();
+    public List<GymnasticDTO> getAll() {
+        return GymnasticDTO.mappingGymnasticToDTO(repository.findAll());
     }
 
     @Override
