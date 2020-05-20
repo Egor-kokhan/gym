@@ -1,5 +1,6 @@
 package com.sportproject.gym.controller;
 
+import com.sportproject.gym.DTO.GymnasticDTO;
 import com.sportproject.gym.entity.Gymnastic;
 import com.sportproject.gym.service.GymnasticService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class GymnasticController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Gymnastic>> getGymnastics() {
-        List<Gymnastic> gymnastics = service.getAll();
+    public ResponseEntity<List<GymnasticDTO>> getGymnastics() {
+        List<GymnasticDTO> gymnastics = service.getAll();
         return ResponseEntity.ok(gymnastics);
     }
     @GetMapping(value = "/{id}")

@@ -41,12 +41,6 @@ public class PersonDTO {
                 GymnasticDTO gymnasticDTO = new GymnasticDTO();
                 gymnasticDTO.setDescription(gymnastic.getDescription());
                 gymnasticDTO.setName(gymnastic.getName());
-                Person fakePerson = new Person();
-                fakePerson.setAge(1);
-                fakePerson.setLastName("I");
-                Set<Person> set = new HashSet<>();
-                set.add(fakePerson);
-                gymnasticDTO.setPersons(set);
                 gymnasticDTOS.add(gymnasticDTO);
             }
             personDTO.setGymnastics(gymnasticDTOS);
