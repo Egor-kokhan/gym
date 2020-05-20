@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS Gymnastic cascade;
 CREATE TABLE IF NOT EXISTS Gymnastic
 (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY COMMENT 'Уникальный идентификатор',
-    name        VARCHAR(50) NOT NULL COMMENT 'Название упражнения',
+    name        VARCHAR(50) NOT NULL COMMENT 'Название упражнения',--
     description VARCHAR(300) NOT NULL COMMENT 'Описание упражнения'
 );
 COMMENT ON TABLE Gymnastic IS 'Упражнение';
