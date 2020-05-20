@@ -9,8 +9,11 @@ CREATE TABLE IF NOT EXISTS Person
 );
 COMMENT ON TABLE Person IS 'Пользователь';
 
-INSERT INTO Person (first_name, last_name, age) VALUES ('Egor', 'Kohan', 23);
-INSERT INTO Person (first_name, last_name, age) VALUES ('Alex', 'Myagkov', 24);
+drop sequence if exists Person_Sequence;
+create sequence Person_Sequence;
+
+INSERT INTO Person (id, first_name, last_name, age) VALUES (Person_Sequence.nextval, 'Egor', 'Kohan', 23);
+INSERT INTO Person (id, first_name, last_name, age) VALUES (Person_Sequence.nextval, 'Alex', 'Myagkov', 24);
 
 DROP TABLE IF EXISTS Gymnastic cascade;
 CREATE TABLE IF NOT EXISTS Gymnastic
