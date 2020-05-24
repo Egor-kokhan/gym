@@ -20,7 +20,7 @@ configurations {
 
 repositories {
 	mavenCentral()
-}
+} 
 
 dependencies {
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.12'
