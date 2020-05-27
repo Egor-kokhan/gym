@@ -17,7 +17,7 @@ public class Person {
             generator="person_seq")
     @SequenceGenerator(name="person_seq",
             sequenceName="Person_Sequence", allocationSize=1)
-    private long id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
