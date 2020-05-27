@@ -1,8 +1,9 @@
 package com.sportproject.gym.DTO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sportproject.gym.entity.Gymnastic;
 import com.sportproject.gym.entity.Person;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Set;
  * @author Egor on 18.05.2020.
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
 
     private String firstName;
@@ -41,15 +43,11 @@ public class PersonDTO {
                 GymnasticDTO gymnasticDTO = new GymnasticDTO();
                 gymnasticDTO.setDescription(gymnastic.getDescription());
                 gymnasticDTO.setName(gymnastic.getName());
-                Person fakePerson = new Person();
-                fakePerson.setAge(1);
-                fakePerson.setLastName("I");
-                Set<Person> set = new HashSet<>();
-                set.add(fakePerson);
-                gymnasticDTO.setPersons(set);
                 gymnasticDTOS.add(gymnasticDTO);
             }
-            personDTO.setGymnastics(gymnasticDTOS);
+            if (!gymnasticDTOS.isEmpty()) {
+                personDTO.setGymnastics(gymnasticDTOS);
+            }
 
             resultDto.add(personDTO);
 

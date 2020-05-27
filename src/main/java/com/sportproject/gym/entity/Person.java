@@ -13,11 +13,8 @@ import java.util.Set;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE,
-            generator="person_seq")
-    @SequenceGenerator(name="person_seq",
-            sequenceName="Person_Sequence", allocationSize=1)
-    private Long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -31,10 +28,6 @@ public class Person {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "Person_Gymnastic",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "gymnastic_id"))
     private Set<Gymnastic> gymnastics;
 
 }
