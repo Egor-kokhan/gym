@@ -21,7 +21,7 @@ public class Training {
     @Column(nullable = false)
     private String description;
 
-    @Column
-    @OneToMany
+    @Column(nullable = false)
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Gymnastic> gymnastics;
 }

@@ -2,6 +2,7 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.SetEntityDTO;
 import com.sportproject.gym.entity.SetEntity;
+import com.sportproject.gym.mapper.SetEntityMapper;
 import com.sportproject.gym.repository.SetEntityRepository;
 import com.sportproject.gym.service.SetEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,35 +16,38 @@ import java.util.List;
 @Service
 public class SetEntityServiceImpl implements SetEntityService {
 
-    private SetEntityRepository repository;
+    private final SetEntityRepository repository;
+    private final SetEntityMapper mapper;
+
 
     @Autowired
-    public SetEntityServiceImpl (SetEntityRepository repository) {
+    public SetEntityServiceImpl(SetEntityRepository repository, SetEntityMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
+
 
     @Override
     public List<SetEntityDTO> getAll() {
-        List<SetEntityDTO> sets = SetEntityDTO. (repository.findAll());
-        return sets;
+//        List<SetEntityDTO> sets = SetEntityDTO.(repository.findAll());
+        return null;
     }
 
     @Override
     public SetEntityDTO get(long id) {
-        SetEntityDTO set = SetEntityDTO. (repository.findById(id));
-        return set;
+        return mapper.entityToDTO(repository.getOne(id));
     }
 
     @Override
     public SetEntityDTO create(SetEntity setEntity) {
-        SetEntityDTO set = SetEntityDTO. (repository.save(setEntity));
-        return set;
+//        SetEntityDTO set = SetEntityDTO. (repository.save(setEntity));
+        return null;
     }
 
     @Override
     public SetEntityDTO update(SetEntity setEntity) {
-        SetEntityDTO set = SetEntityDTO. (repository.save(setEntity));
-        return set;
+//        SetEntityDTO set = SetEntityDTO. (repository.save(setEntity));
+        return null;
     }
 
     @Override
