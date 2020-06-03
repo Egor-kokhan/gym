@@ -1,15 +1,15 @@
 package com.sportproject.gym.DTO;
 
-import javax.persistence.Column;
+import org.mapstruct.Mapper;
 
 /**
  * @author Alex on 27.05.2020.
  */
+@Mapper
 public class SetEntityDTO {
 
     private int repeats;
     private double weight;
     private long visitId;
     private long gymnasticId;
-    
 }

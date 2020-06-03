@@ -29,24 +29,21 @@ public class SetEntityServiceImpl implements SetEntityService {
 
     @Override
     public List<SetEntityDTO> getAll() {
-//        List<SetEntityDTO> sets = SetEntityDTO.(repository.findAll());
         return null;
     }
 
     @Override
     public SetEntityDTO get(long id) {
-        return mapper.entityToDTO(repository.getOne(id));
+        return null;
     }
 
     @Override
     public SetEntityDTO create(SetEntity setEntity) {
-//        SetEntityDTO set = SetEntityDTO. (repository.save(setEntity));
         return null;
     }
 
     @Override
     public SetEntityDTO update(SetEntity setEntity) {
-//        SetEntityDTO set = SetEntityDTO. (repository.save(setEntity));
         return null;
     }
 

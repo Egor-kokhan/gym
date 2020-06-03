@@ -2,20 +2,31 @@ package com.sportproject.gym.mapper;
 
 import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Person;
-import org.mapstruct.DecoratedWith;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 /**
- * @author Egor on 01.06.2020.
+ * @author Alex on 03.06.2020.
  */
-@Mapper(componentModel = "spring")
-@DecoratedWith(PersonMapperDecorator.class)
-public interface PersonMapper {
 
-    PersonMapper INSTANCE = Mappers.getMapper( PersonMapper.class );
+@Mapper
+public abstract class PersonMapper {
+    public abstract PersonDTO entityToDTO(Person source);
+    @InheritInverseConfiguration
+    public abstract List<PersonDTO> entityToDTO(List<Person> source);
 
-    PersonDTO personToPersonDto(Person person);
+    public abstract Person dTOToEntity(PersonDTO destination);
 
+    @AfterMapping
+    public void afterEntityToDTO(List<Person> source, @MappingTarget List<PersonDTO> target) {
+        for (PersonDTO personDTO : target) {
+            if (personDTO.getGymnastics().isEmpty()){
+                personDTO.setGymnastics(null);
+            }
+        }
+    }
 }
-

@@ -17,17 +17,18 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private PersonRepository repository;
-    private final PersonMapper personMapper;
+    private PersonMapper mapper;
 
     @Autowired
-    public PersonServiceImpl(PersonRepository repository, PersonMapper personMapper) {
+    public PersonServiceImpl(PersonRepository repository, PersonMapper mapper) {
         this.repository = repository;
-        this.personMapper = personMapper;
+        this.mapper = mapper;
     }
 
     @Override
-    public PersonDTO getAll() {
-        return personMapper.personToPersonDto(repository.findAll().get(0));
+    public List<PersonDTO> getAll() {
+        return mapper.entityToDTO(repository.findAll());
+
     }
 
     @Override
