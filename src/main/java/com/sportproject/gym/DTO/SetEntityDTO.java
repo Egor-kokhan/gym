@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
  */
 @Mapper
 public class SetEntityDTO {
-    private long id;
+
     private int repeats;
     private double weight;
     private long visitId;

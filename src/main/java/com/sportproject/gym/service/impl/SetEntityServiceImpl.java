@@ -2,6 +2,7 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.SetEntityDTO;
 import com.sportproject.gym.entity.SetEntity;
+import com.sportproject.gym.mapper.SetEntityMapper;
 import com.sportproject.gym.repository.SetEntityRepository;
 import com.sportproject.gym.service.SetEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,16 @@ import java.util.List;
 @Service
 public class SetEntityServiceImpl implements SetEntityService {
 
-    private SetEntityRepository repository;
+    private final SetEntityRepository repository;
+    private final SetEntityMapper mapper;
+
 
     @Autowired
-    public SetEntityServiceImpl (SetEntityRepository repository) {
+    public SetEntityServiceImpl(SetEntityRepository repository, SetEntityMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
+
 
     @Override
     public List<SetEntityDTO> getAll() {
