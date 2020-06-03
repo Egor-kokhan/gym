@@ -2,6 +2,7 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Person;
+import com.sportproject.gym.mapper.PersonMapper;
 import com.sportproject.gym.repository.PersonRepository;
 import com.sportproject.gym.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,18 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private PersonRepository repository;
+    private PersonMapper mapper;
+
 
     @Autowired
-    public PersonServiceImpl(PersonRepository repository) {
+    public PersonServiceImpl(PersonRepository repository, PersonMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
     public List<PersonDTO> getAll() {
-        List<PersonDTO> persons = PersonDTO.mappingPersonToDTO(repository.findAll());
-        return persons;
+        return mapper.entityToDTO(repository.findAll());
     }
 
     @Override
