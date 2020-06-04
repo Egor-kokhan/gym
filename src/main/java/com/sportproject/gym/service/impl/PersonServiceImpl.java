@@ -19,7 +19,6 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository repository;
     private PersonMapper mapper;
 
-
     @Autowired
     public PersonServiceImpl(PersonRepository repository, PersonMapper mapper) {
         this.repository = repository;
@@ -29,6 +28,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<PersonDTO> getAll() {
         return mapper.entityToDTO(repository.findAll());
+
     }
 
     @Override
