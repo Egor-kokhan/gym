@@ -11,7 +11,7 @@ import java.util.List;
 public interface SetEntityService {
     List<SetEntityDTO> getAll();
     SetEntityDTO get(long id);
-    SetEntityDTO create(SetEntity setEntity);
-    SetEntityDTO update(SetEntity setEntity);
+    SetEntityDTO create(SetEntityDTO setEntity);
+    SetEntityDTO update(SetEntityDTO setEntity);
     void delete(long id);
 }

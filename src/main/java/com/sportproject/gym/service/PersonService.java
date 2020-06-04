@@ -9,7 +9,7 @@ import java.util.List;
  * @author Egor on 12.05.2020.
  */
 public interface PersonService {
-    PersonDTO getAll();
+    List<PersonDTO>  getAll();
     List<Person> getAllMoreOlder();
 
     void delete(long id);

@@ -4,11 +4,14 @@ import com.sportproject.gym.DTO.SetEntityDTO;
 import com.sportproject.gym.entity.SetEntity;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 /**
- * @author Egor on 27.05.2020.
+ * @author Alex on 04.06.2020.
  */
-@Mapper(componentModel = "spring")
-public interface SetEntityMapper {
-//    SetEntity dTOToEntity(SetEntityDTO setEntityDTO);
-    SetEntityDTO entityToDTO(SetEntity setEntity);
+@Mapper
+public abstract class SetEntityMapper {
+    public abstract SetEntityDTO entityToDTO(SetEntity source);
+    public abstract List<SetEntityDTO> entityToDTO(List<SetEntity> source);
+    public abstract SetEntity dTOToEntity(SetEntityDTO destination);
 }
