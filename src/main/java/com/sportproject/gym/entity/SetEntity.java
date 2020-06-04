@@ -20,11 +20,11 @@ public class SetEntity {
     @Column (nullable = false)
     private double weight;
 
-    @Column (name = "VISIT_ID", nullable = false)
-    private long visitId;
-
-    @Column (name = "GYMNASTIC_ID", nullable = false)
-    private long gymnasticId;
+//    @Column (name = "VISIT_ID", nullable = false)
+//    private long visitId;
+//
+//    @Column (name = "GYMNASTIC_ID", nullable = false)
+//    private long gymnasticId;
 
 
 }

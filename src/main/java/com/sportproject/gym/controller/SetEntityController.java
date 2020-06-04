@@ -22,7 +22,7 @@ public class SetEntityController {
 
     private SetEntityService service;
 
-    @Autowired //TODO чиво ?
+    @Autowired
     public SetEntityController(SetEntityService service){
         this.service = service;
     }
@@ -43,6 +43,12 @@ public class SetEntityController {
     public ResponseEntity<SetEntityDTO> create(@RequestBody SetEntity setEntity) {
         SetEntityDTO newSetEntity = service.create(setEntity);
         return ResponseEntity.ok(newSetEntity);
+    }
+
+    @PutMapping()
+    public ResponseEntity<SetEntityDTO> update(@RequestBody SetEntity setEntity) {
+        SetEntityDTO returnSetEntity = service.update(setEntity);
+        return ResponseEntity.ok(returnSetEntity);
     }
 
     @DeleteMapping("/{id}")
