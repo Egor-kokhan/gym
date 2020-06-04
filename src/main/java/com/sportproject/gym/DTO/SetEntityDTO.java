@@ -10,6 +10,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SetEntityDTO {
 
+    private long id;
     private int repeats;
     private double weight;
 //    private long visitId;
