@@ -1,7 +1,6 @@
 package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.SetEntityDTO;
-import com.sportproject.gym.entity.SetEntity;
 import com.sportproject.gym.mapper.SetEntityMapper;
 import com.sportproject.gym.repository.SetEntityRepository;
 import com.sportproject.gym.service.SetEntityService;
@@ -15,8 +14,8 @@ import java.util.List;
 @Service
 public class SetEntityServiceImpl implements SetEntityService {
 
-    private SetEntityRepository repository;
-    private SetEntityMapper mapper;
+    private final SetEntityRepository repository;
+    private final SetEntityMapper mapper;
 
     @Autowired
     public SetEntityServiceImpl(SetEntityRepository repository, SetEntityMapper mapper) {
