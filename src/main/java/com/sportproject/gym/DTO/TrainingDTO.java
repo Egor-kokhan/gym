@@ -1,19 +1,19 @@
 package com.sportproject.gym.DTO;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
- * @author Alex on 27.05.2020.
+ * @author Egor on 04.06.2020.
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SetEntityDTO {
+public class TrainingDTO {
 
     private long id;
-    private int repeats;
-    private double weight;
-//    private long visitId;
-//    private long gymnasticId;
+
+    private String name;
+
+    private String description;
+
 }
