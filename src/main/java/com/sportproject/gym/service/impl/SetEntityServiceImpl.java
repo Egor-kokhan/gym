@@ -1,6 +1,7 @@
 package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.SetEntityDTO;
+
 import com.sportproject.gym.mapper.SetEntityMapper;
 import com.sportproject.gym.repository.SetEntityRepository;
 import com.sportproject.gym.service.SetEntityService;
@@ -30,6 +31,7 @@ public class SetEntityServiceImpl implements SetEntityService {
 
     @Override
     public SetEntityDTO get(long id) {
+
         if (repository.existsById(id)){
             return mapper.entityToDTO(repository.getOne(id));
         } else {

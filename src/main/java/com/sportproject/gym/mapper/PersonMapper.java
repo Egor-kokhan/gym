@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * @author Alex on 03.06.2020.
  */
-
 @Mapper
 public abstract class PersonMapper {
     public abstract PersonDTO entityToDTO(Person source);
