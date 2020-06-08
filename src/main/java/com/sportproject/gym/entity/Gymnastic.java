@@ -22,10 +22,10 @@ public class Gymnastic {
 
     @Column(nullable = false)
     private String description;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "gymnastics", fetch = FetchType.LAZY)
-    private Set<Person> persons;
+//
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @ManyToMany(mappedBy = "gymnastics", fetch = FetchType.LAZY)
+//    private Set<Person> persons;
 
 }
