@@ -1,9 +1,11 @@
 package com.sportproject.gym.controller;
 
 import com.sportproject.gym.DTO.GymnasticDTO;
+import com.sportproject.gym.DTO.SetEntityDTO;
 import com.sportproject.gym.entity.Gymnastic;
 import com.sportproject.gym.service.GymnasticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,15 +31,26 @@ public class GymnasticController {
         return ResponseEntity.ok(gymnastics);
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Gymnastic> getGymnasticById(@PathVariable Long id) {
-        Gymnastic gymnastic = service.getById(id);
+    public ResponseEntity<GymnasticDTO> getGymnasticById(@PathVariable long id) {
+        GymnasticDTO gymnastic = service.get(id);
         return ResponseEntity.ok(gymnastic);
     }
 
-    @GetMapping(value = "/type")
-    @ResponseBody
-    public ResponseEntity<Gymnastic> getGymnasticByName(@RequestParam String name) {
-        Gymnastic gymnastic = service.getByName(name);
-        return ResponseEntity.ok(gymnastic);
+    @PostMapping()
+    public ResponseEntity<GymnasticDTO> create(@RequestBody GymnasticDTO gymnastic) {
+        GymnasticDTO newSetEntity = service.create(gymnastic);
+        return ResponseEntity.ok(newSetEntity);
+    }
+
+    @PutMapping()
+    public ResponseEntity<GymnasticDTO> update(@RequestBody GymnasticDTO gymnastic) {
+        GymnasticDTO returnSetEntity = service.update(gymnastic);
+        return ResponseEntity.ok(returnSetEntity);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable long id) {
+        service.delete(id);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }
