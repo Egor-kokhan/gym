@@ -25,9 +25,9 @@ public class Person {
     @Column(nullable = false)
     private int age;
 
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToMany(fetch = FetchType.LAZY)
-//    private Set<Gymnastic> gymnastics;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Visit> visits;
 
 }
