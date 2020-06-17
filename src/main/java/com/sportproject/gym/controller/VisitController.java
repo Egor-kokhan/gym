@@ -46,7 +46,7 @@ public class VisitController {
     @PostMapping
     public ResponseEntity<VisitDTO> create(@RequestBody VisitDTO visitDTO) {
         VisitDTO newVisit = service.create(visitDTO);
-        return ResponseEntity.ok(newVisit);
+        return ResponseEntity.ok(service.get(newVisit.getId()));
     }
 
     @PutMapping

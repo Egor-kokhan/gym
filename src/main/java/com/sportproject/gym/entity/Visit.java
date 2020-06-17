@@ -19,7 +19,11 @@ public class Visit {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDateTime;
 
-    @ManyToOne
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(nullable = false)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
     private Person personOwner;
 
 }

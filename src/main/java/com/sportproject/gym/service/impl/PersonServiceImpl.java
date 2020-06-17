@@ -2,6 +2,7 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Person;
+import com.sportproject.gym.entity.Visit;
 import com.sportproject.gym.mapper.PersonMapper;
 import com.sportproject.gym.repository.PersonRepository;
 import com.sportproject.gym.service.PersonService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Egor on 12.05.2020.
@@ -28,17 +30,30 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<PersonDTO> getAll() {
-        return mapper.entityToDTO(repository.findAll());
+        List<Person> people = repository.findAll();
+//        Set<Visit> visits = people.get(0).getVisits();
+        List<PersonDTO> peoples = mapper.entityToDTO(people);
+        return peoples;
     }
 
     @Override
-    public List<Person> getAllMoreOlder() {
-        List<Person> persons = repository.findAll();
-        for (Person person : persons) {
-            person.setAge(person.getAge() + 5);
+    public PersonDTO get(long id) {
+        if (repository.existsById(id)){
+            return mapper.entityToDTO(repository.getOne(id));
+        } else {
+            System.out.println("Нет с таким id");
+            return null;
         }
+    }
 
-        return persons;
+    @Override
+    public PersonDTO create(PersonDTO personDTO) {
+        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(personDTO)));
+    }
+
+    @Override
+    public PersonDTO update(PersonDTO personDTO) {
+        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(personDTO)));
     }
 
     @Override
@@ -49,17 +64,4 @@ public class PersonServiceImpl implements PersonService {
             repository.deleteById(id);
         }
     }
-
-    @Override
-    public Person create(Person person) {
-        repository.save(person);
-        return person;
-    }
-
-    @Override
-    public Person update(Person person) {
-        repository.save(person);
-        return person;
-    }
-
 }

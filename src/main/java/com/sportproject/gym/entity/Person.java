@@ -13,7 +13,7 @@ import java.util.Set;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "first_name", nullable = false)
@@ -25,9 +25,21 @@ public class Person {
     @Column(nullable = false)
     private int age;
 
+//    @OneToMany(
+//                mappedBy = "personOwner",
+//                cascade = CascadeType.ALL,
+//                fetch = FetchType.LAZY,
+//                orphanRemoval = true)
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn
+    @OneToMany(
+            mappedBy="personOwner",
+            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY,
+            orphanRemoval = true
+    )
     private Set<Visit> visits;
 
 }

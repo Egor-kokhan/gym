@@ -31,7 +31,6 @@ public class SetEntityServiceImpl implements SetEntityService {
 
     @Override
     public SetEntityDTO get(long id) {
-
         if (repository.existsById(id)){
             return mapper.entityToDTO(repository.getOne(id));
         } else {
