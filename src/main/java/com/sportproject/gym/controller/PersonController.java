@@ -31,27 +31,27 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
-    @GetMapping(value = "/age+5")
-    public ResponseEntity<List<Person>> getMoreOlderPerson() {
-        List<Person> persons = service.getAllMoreOlder();
-        return ResponseEntity.ok(persons);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable long id){
-        service.delete(id);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDTO> get(@PathVariable long id) {
+        PersonDTO person = service.get(id);
+        return ResponseEntity.ok(person);
     }
 
     @PostMapping
-    public ResponseEntity<Person> create(@RequestBody Person person) {
-        Person newPerson = service.create(person);
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person) {
+        PersonDTO newPerson = service.create(person);
         return ResponseEntity.ok(newPerson);
     }
 
     @PutMapping
-    public ResponseEntity<Person> update(@RequestBody Person person) {
-        Person newPerson = service.update(person);
+    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person) {
+        PersonDTO newPerson = service.update(person);
         return ResponseEntity.ok(newPerson);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable long id){
+        service.delete(id);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }

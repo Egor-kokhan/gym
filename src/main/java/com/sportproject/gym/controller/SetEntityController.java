@@ -1,9 +1,6 @@
 package com.sportproject.gym.controller;
 
 import com.sportproject.gym.DTO.SetEntityDTO;
-import com.sportproject.gym.entity.Person;
-import com.sportproject.gym.entity.SetEntity;
-import com.sportproject.gym.service.PersonService;
 import com.sportproject.gym.service.SetEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +54,5 @@ public class SetEntityController {
         service.delete(id);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
-
 
 }

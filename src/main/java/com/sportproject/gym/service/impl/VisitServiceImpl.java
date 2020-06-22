@@ -1,6 +1,7 @@
 package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.VisitDTO;
+import com.sportproject.gym.entity.Visit;
 import com.sportproject.gym.mapper.VisitMapper;
 import com.sportproject.gym.repository.VisitRepository;
 import com.sportproject.gym.service.VisitService;
@@ -27,7 +28,9 @@ public class VisitServiceImpl implements VisitService {
     @Override
 
     public List<VisitDTO> getAll() {
-        return mapper.entityToDTO(repository.findAll());
+        List<Visit> visits = repository.findAll();
+        List<VisitDTO> visitsDto = mapper.entityToDTO(visits);
+        return visitsDto;
     }
 
     @Override

@@ -22,10 +22,5 @@ public abstract class PersonMapper {
 
     @AfterMapping
     public void afterEntityToDTO(List<Person> source, @MappingTarget List<PersonDTO> target) {
-        for (PersonDTO personDTO : target) {
-            if (personDTO.getGymnastics().isEmpty()){
-                personDTO.setGymnastics(null);
-            }
-        }
     }
 }
