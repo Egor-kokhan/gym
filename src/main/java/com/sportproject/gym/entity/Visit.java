@@ -19,7 +19,4 @@ public class Visit {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDateTime;
 
-    @ManyToOne
-    private Person personOwner;
-
 }
