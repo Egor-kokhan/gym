@@ -8,6 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface GymnasticRepository extends JpaRepository<Gymnastic, Long> {
 
-    Gymnastic findByName(String name);
-
 }

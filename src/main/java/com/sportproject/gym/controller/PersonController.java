@@ -31,12 +31,6 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
-    @GetMapping(value = "/age+5")
-    public ResponseEntity<List<Person>> getMoreOlderPerson() {
-        List<Person> persons = service.getAllMoreOlder();
-        return ResponseEntity.ok(persons);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable long id){
         service.delete(id);
@@ -44,14 +38,14 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> create(@RequestBody Person person) {
-        Person newPerson = service.create(person);
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO personDTO) {
+        PersonDTO newPerson = service.create(personDTO);
         return ResponseEntity.ok(newPerson);
     }
 
     @PutMapping
-    public ResponseEntity<Person> update(@RequestBody Person person) {
-        Person newPerson = service.update(person);
+    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO personDTO) {
+        PersonDTO newPerson = service.create(personDTO);
         return ResponseEntity.ok(newPerson);
     }
 }

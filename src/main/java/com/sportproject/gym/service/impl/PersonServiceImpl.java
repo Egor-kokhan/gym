@@ -2,6 +2,7 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Person;
+import com.sportproject.gym.mapper.CommonMapper;
 import com.sportproject.gym.repository.PersonRepository;
 import com.sportproject.gym.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +17,20 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private PersonRepository repository;
+    private CommonMapper mapper;
+
 
     @Autowired
-    public PersonServiceImpl(PersonRepository repository) {
+    public PersonServiceImpl(PersonRepository repository, CommonMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
     public List<PersonDTO> getAll() {
-        List<PersonDTO> persons = PersonDTO.mappingPersonToDTO(repository.findAll());
-        return persons;
-    }
-
-    @Override
-    public List<Person> getAllMoreOlder() {
-        List<Person> persons = repository.findAll();
-        for (Person person : persons) {
-            person.setAge(person.getAge() + 5);
-        }
-
-        return persons;
+        List<Person> all = repository.findAll();
+        List<PersonDTO> personDTOS = mapper.personToPersonDTO(all);
+        return personDTOS;
     }
 
     @Override
@@ -48,15 +43,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person create(Person person) {
-        repository.save(person);
-        return person;
+    public PersonDTO create(PersonDTO personDTO) {
+        return mapper.personToPersonDTO(repository.save(mapper.personDtoToPerson(personDTO)));
     }
 
     @Override
-    public Person update(Person person) {
-        repository.save(person);
-        return person;
+    public PersonDTO update(PersonDTO personDTO) {
+        return mapper.personToPersonDTO(repository.save(mapper.personDtoToPerson(personDTO)));
     }
 
 }

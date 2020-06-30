@@ -9,10 +9,9 @@ import java.util.List;
  * @author Egor on 12.05.2020.
  */
 public interface PersonService {
-    List<PersonDTO> getAll();
-    List<Person> getAllMoreOlder();
+    List<PersonDTO>  getAll();
 
     void delete(long id);
-    Person create(Person person);
-    Person update(Person person);
+    PersonDTO create(PersonDTO personDTO);
+    PersonDTO update(PersonDTO personDTO);
 }

@@ -1,6 +1,7 @@
 package com.sportproject.gym.service;
 
 import com.sportproject.gym.DTO.GymnasticDTO;
+import com.sportproject.gym.DTO.SetEntityDTO;
 import com.sportproject.gym.entity.Gymnastic;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
  */
 public interface GymnasticService {
     List<GymnasticDTO> getAll();
-    Gymnastic getByName(String name);
-    Gymnastic getById(Long id);
+    GymnasticDTO get(long id);
+    GymnasticDTO create(GymnasticDTO gymnastic);
+    GymnasticDTO update(GymnasticDTO gymnastic);
+    void delete(long id);
 }

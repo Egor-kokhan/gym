@@ -18,33 +18,7 @@ import java.util.Set;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GymnasticDTO {
+    private long id;
     private String name;
-
     private String description;
-
-    private Set<PersonDTO> persons;
-
-    public static List<GymnasticDTO> mappingGymnasticToDTO(List<Gymnastic> gymnastics) {
-        List<GymnasticDTO> resultDto = new ArrayList<>();
-        for (Gymnastic gymnastic : gymnastics) {
-            GymnasticDTO gymnasticDTO = new GymnasticDTO();
-            gymnasticDTO.setDescription(gymnastic.getDescription());
-            gymnasticDTO.setName(gymnastic.getName());
-
-            Set<PersonDTO> personDTOS = new HashSet<>();
-
-            for (Person person :gymnastic.getPersons()) {
-                PersonDTO personDTO = new PersonDTO();
-                personDTO.setAge(person.getAge());
-                personDTO.setFirstName(person.getFirstName());
-                personDTO.setLastName(person.getLastName());
-                personDTOS.add(personDTO);
-            }
-
-            gymnasticDTO.setPersons(personDTOS);
-            resultDto.add(gymnasticDTO);
-        }
-        return resultDto;
-
-    }
 }

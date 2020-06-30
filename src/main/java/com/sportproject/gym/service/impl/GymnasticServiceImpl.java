@@ -1,8 +1,7 @@
 package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.GymnasticDTO;
-import com.sportproject.gym.DTO.PersonDTO;
-import com.sportproject.gym.entity.Gymnastic;
+import com.sportproject.gym.mapper.CommonMapper;
 import com.sportproject.gym.repository.GymnasticRepository;
 import com.sportproject.gym.service.GymnasticService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +16,42 @@ import java.util.List;
 public class GymnasticServiceImpl implements GymnasticService {
 
     private GymnasticRepository repository;
+    private final CommonMapper mapper;
 
     @Autowired
-    public GymnasticServiceImpl(GymnasticRepository repository) {
+    public GymnasticServiceImpl(GymnasticRepository repository, CommonMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
+
 
     @Override
     public List<GymnasticDTO> getAll() {
-        return GymnasticDTO.mappingGymnasticToDTO(repository.findAll());
+        return mapper.gymnasticToGymnasticDto(repository.findAll());
     }
 
     @Override
-    public Gymnastic getByName(String name) {
-        return repository.findByName(name);
+    public GymnasticDTO get(long id) {
+        if (repository.existsById(id)){
+            return mapper.gymnasticToGymnasticDto(repository.getOne(id));
+        } else {
+            System.out.println("Нет с таким id");
+            return null;
+        }
     }
 
     @Override
-    public Gymnastic getById(Long id) {
-        return repository.getOne(id);
+    public GymnasticDTO create(GymnasticDTO gymnastic) {
+        return mapper.gymnasticToGymnasticDto(repository.save(mapper.gymnasticDtoToGymnastic(gymnastic)));
     }
 
+    @Override
+    public GymnasticDTO update(GymnasticDTO gymnastic) {
+        return mapper.gymnasticToGymnasticDto(repository.save(mapper.gymnasticDtoToGymnastic(gymnastic)));
+    }
+
+    @Override
+    public void delete(long id) {
+        repository.deleteById(id);
+    }
 }
