@@ -31,27 +31,21 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PersonDTO> get(@PathVariable long id) {
-        PersonDTO person = service.get(id);
-        return ResponseEntity.ok(person);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id){
+        service.delete(id);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
     @PostMapping
-    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO person) {
-        PersonDTO newPerson = service.create(person);
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO personDTO) {
+        PersonDTO newPerson = service.create(personDTO);
         return ResponseEntity.ok(newPerson);
     }
 
     @PutMapping
-    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO person) {
-        PersonDTO newPerson = service.update(person);
+    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO personDTO) {
+        PersonDTO newPerson = service.create(personDTO);
         return ResponseEntity.ok(newPerson);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable long id){
-        service.delete(id);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }

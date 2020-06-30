@@ -1,7 +1,6 @@
 package com.sportproject.gym.service;
 
 import com.sportproject.gym.DTO.PersonDTO;
-import com.sportproject.gym.DTO.SetEntityDTO;
 import com.sportproject.gym.entity.Person;
 
 import java.util.List;
@@ -11,9 +10,8 @@ import java.util.List;
  */
 public interface PersonService {
     List<PersonDTO>  getAll();
-    PersonDTO get(long id);
-    PersonDTO create(PersonDTO person);
-    PersonDTO update(PersonDTO person);
-    void delete(long id);
 
+    void delete(long id);
+    PersonDTO create(PersonDTO personDTO);
+    PersonDTO update(PersonDTO personDTO);
 }

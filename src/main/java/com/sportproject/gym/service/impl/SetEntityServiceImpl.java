@@ -2,7 +2,7 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.SetEntityDTO;
 
-import com.sportproject.gym.mapper.SetEntityMapper;
+import com.sportproject.gym.mapper.CommonMapper;
 import com.sportproject.gym.repository.SetEntityRepository;
 import com.sportproject.gym.service.SetEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +16,24 @@ import java.util.List;
 public class SetEntityServiceImpl implements SetEntityService {
 
     private final SetEntityRepository repository;
-    private final SetEntityMapper mapper;
+    private final CommonMapper mapper;
 
     @Autowired
-    public SetEntityServiceImpl(SetEntityRepository repository, SetEntityMapper mapper) {
+    public SetEntityServiceImpl(SetEntityRepository repository, CommonMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
     @Override
     public List<SetEntityDTO> getAll() {
-        return mapper.entityToDTO(repository.findAll());
+        return mapper.setEntityToSetEntityDto(repository.findAll());
     }
 
     @Override
     public SetEntityDTO get(long id) {
+
         if (repository.existsById(id)){
-            return mapper.entityToDTO(repository.getOne(id));
+            return mapper.setEntityToSetEntityDto(repository.getOne(id));
         } else {
             System.out.println("Нет с таким id");
             return null;
@@ -41,12 +42,12 @@ public class SetEntityServiceImpl implements SetEntityService {
 
     @Override
     public SetEntityDTO create(SetEntityDTO setEntityDTO) {
-        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(setEntityDTO)));
+        return mapper.setEntityToSetEntityDto(repository.save(mapper.setEntityDtoToSetEntity(setEntityDTO)));
     }
 
     @Override
     public SetEntityDTO update(SetEntityDTO setEntityDTO) {
-        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(setEntityDTO)));
+        return mapper.setEntityToSetEntityDto(repository.save(mapper.setEntityDtoToSetEntity(setEntityDTO)));
     }
 
     @Override

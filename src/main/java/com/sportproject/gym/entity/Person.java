@@ -3,12 +3,15 @@ package com.sportproject.gym.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
  * @author Egor on 12.05.2020.
  */
 @Data
+@EqualsAndHashCode(of = {"id"})
+@ToString(of = {"id", "firstName", "lastName", "age"})
 @Entity()
 public class Person {
 
@@ -25,21 +28,13 @@ public class Person {
     @Column(nullable = false)
     private int age;
 
-//    @OneToMany(
-//                mappedBy = "personOwner",
-//                cascade = CascadeType.ALL,
-//                fetch = FetchType.LAZY,
-//                orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "person")
+    private List<Visit> visits;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JoinColumn
-    @OneToMany(
-            mappedBy="personOwner",
-            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY,
-            orphanRemoval = true
-    )
-    private Set<Visit> visits;
-
+    public void setVisits(List<Visit> visits) {
+        if (visits != null){
+            visits.forEach(visit -> visit.setPerson(this));
+        }
+        this.visits = visits;
+    }
 }

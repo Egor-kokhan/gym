@@ -3,8 +3,8 @@ package com.sportproject.gym.DTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sportproject.gym.entity.Gymnastic;
 import com.sportproject.gym.entity.Person;
-import com.sportproject.gym.entity.Visit;
 import lombok.*;
+import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.Set;
  * @author Egor on 18.05.2020.
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
 
     private long id;
@@ -27,6 +27,9 @@ public class PersonDTO {
 
     private int age;
 
-    private Set<VisitDTO> visits;
+    private String today;
 
+    private Set<GymnasticDTO> gymnastics;
+
+    private List<VisitDTO> visits;
 }

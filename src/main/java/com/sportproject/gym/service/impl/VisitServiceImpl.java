@@ -2,7 +2,8 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.VisitDTO;
 import com.sportproject.gym.entity.Visit;
-import com.sportproject.gym.mapper.VisitMapper;
+import com.sportproject.gym.mapper.CommonMapper;
+import com.sportproject.gym.repository.PersonRepository;
 import com.sportproject.gym.repository.VisitRepository;
 import com.sportproject.gym.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +18,27 @@ import java.util.List;
 public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository repository;
-    private final VisitMapper mapper;
+    private final PersonRepository personRepository;
+    private final CommonMapper mapper;
 
     @Autowired
-    public VisitServiceImpl(VisitRepository repository, VisitMapper mapper) {
+    public VisitServiceImpl(VisitRepository repository, PersonRepository personRepository, CommonMapper mapper) {
         this.repository = repository;
+        this.personRepository = personRepository;
         this.mapper = mapper;
     }
 
     @Override
 
     public List<VisitDTO> getAll() {
-        List<Visit> visits = repository.findAll();
-        List<VisitDTO> visitsDto = mapper.entityToDTO(visits);
-        return visitsDto;
+        List<Visit> all = repository.findAll();
+        List<VisitDTO> visitDTOS = mapper.visitToVisitDto(all);
+        return visitDTOS;
     }
 
     @Override
     public VisitDTO get(long id) {
-        return mapper.entityToDTO(repository.getOne(id));
+        return mapper.visitToVisitDto(repository.getOne(id));
     }
 
     @Override
@@ -45,11 +48,11 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public VisitDTO create(VisitDTO visitDTO) {
-        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(visitDTO)));
+        return mapper.visitToVisitDto(repository.save(mapper.visitDtoToVisit(visitDTO)));
     }
 
     @Override
     public VisitDTO update(VisitDTO visitDTO) {
-        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(visitDTO)));
+        return mapper.visitToVisitDto(repository.save(mapper.visitDtoToVisit(visitDTO)));
     }
 }

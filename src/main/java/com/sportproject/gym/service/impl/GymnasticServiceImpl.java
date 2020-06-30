@@ -1,7 +1,7 @@
 package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.GymnasticDTO;
-import com.sportproject.gym.mapper.GymnasticMapper;
+import com.sportproject.gym.mapper.CommonMapper;
 import com.sportproject.gym.repository.GymnasticRepository;
 import com.sportproject.gym.service.GymnasticService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ import java.util.List;
 public class GymnasticServiceImpl implements GymnasticService {
 
     private GymnasticRepository repository;
-    private final GymnasticMapper mapper;
+    private final CommonMapper mapper;
 
     @Autowired
-    public GymnasticServiceImpl(GymnasticRepository repository, GymnasticMapper mapper) {
+    public GymnasticServiceImpl(GymnasticRepository repository, CommonMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -27,13 +27,13 @@ public class GymnasticServiceImpl implements GymnasticService {
 
     @Override
     public List<GymnasticDTO> getAll() {
-        return mapper.entityToDTO(repository.findAll());
+        return mapper.gymnasticToGymnasticDto(repository.findAll());
     }
 
     @Override
     public GymnasticDTO get(long id) {
         if (repository.existsById(id)){
-            return mapper.entityToDTO(repository.getOne(id));
+            return mapper.gymnasticToGymnasticDto(repository.getOne(id));
         } else {
             System.out.println("Нет с таким id");
             return null;
@@ -42,12 +42,12 @@ public class GymnasticServiceImpl implements GymnasticService {
 
     @Override
     public GymnasticDTO create(GymnasticDTO gymnastic) {
-        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(gymnastic)));
+        return mapper.gymnasticToGymnasticDto(repository.save(mapper.gymnasticDtoToGymnastic(gymnastic)));
     }
 
     @Override
     public GymnasticDTO update(GymnasticDTO gymnastic) {
-        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(gymnastic)));
+        return mapper.gymnasticToGymnasticDto(repository.save(mapper.gymnasticDtoToGymnastic(gymnastic)));
     }
 
     @Override
