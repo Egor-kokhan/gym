@@ -14,4 +14,6 @@ public class VisitDTO {
     private long id;
     private Date creationDateTime;
 
+    private PersonDTO person;
+
 }

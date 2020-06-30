@@ -10,9 +10,8 @@ import java.util.List;
  */
 public interface PersonService {
     List<PersonDTO>  getAll();
-    List<Person> getAllMoreOlder();
 
     void delete(long id);
-    Person create(Person person);
-    Person update(Person person);
+    PersonDTO create(PersonDTO personDTO);
+    PersonDTO update(PersonDTO personDTO);
 }

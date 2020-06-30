@@ -2,7 +2,7 @@ package com.sportproject.gym.service.impl;
 
 import com.sportproject.gym.DTO.TrainingDTO;
 import com.sportproject.gym.entity.Training;
-import com.sportproject.gym.mapper.TrainingMapper;
+import com.sportproject.gym.mapper.CommonMapper;
 import com.sportproject.gym.repository.TrainingRepository;
 import com.sportproject.gym.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ import java.util.List;
 public class TrainingServiceImpl implements TrainingService {
 
     private final TrainingRepository repository;
-    private final TrainingMapper mapper;
+    private final CommonMapper mapper;
 
     @Autowired
-    public TrainingServiceImpl(TrainingRepository repository, TrainingMapper mapper) {
+    public TrainingServiceImpl(TrainingRepository repository, CommonMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -28,12 +28,12 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public List<TrainingDTO> getAll() {
-        return mapper.entityToDTO(repository.findAll());
+        return mapper.trainingToTrainingDTO(repository.findAll());
     }
 
     @Override
     public TrainingDTO get(long id) {
-        return mapper.entityToDTO(repository.getOne(id));
+        return mapper.trainingToTrainingDTO(repository.getOne(id));
     }
 
     @Override
@@ -43,13 +43,13 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public TrainingDTO create(TrainingDTO trainingDTO) {
-        Training training = mapper.dTOToEntity(trainingDTO);
+        Training training = mapper.trainingDtoToTraining(trainingDTO);
 
-        return mapper.entityToDTO(repository.save(training));
+        return mapper.trainingToTrainingDTO(repository.save(training));
     }
 
     @Override
     public TrainingDTO update(TrainingDTO trainingDTO) {
-        return mapper.entityToDTO(repository.save(mapper.dTOToEntity(trainingDTO)));
+        return mapper.trainingToTrainingDTO(repository.save(mapper.trainingDtoToTraining(trainingDTO)));
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sportproject.gym.entity.Gymnastic;
 import com.sportproject.gym.entity.Person;
 import lombok.*;
+import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
 
+    private long id;
+
     private String firstName;
 
     private String lastName;
@@ -28,4 +31,5 @@ public class PersonDTO {
 
     private Set<GymnasticDTO> gymnastics;
 
+    private List<VisitDTO> visits;
 }
