@@ -31,12 +31,6 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable long id){
-        service.delete(id);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
-    }
-
     @PostMapping
     public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO personDTO) {
         PersonDTO newPerson = service.create(personDTO);
@@ -47,5 +41,11 @@ public class PersonController {
     public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO personDTO) {
         PersonDTO newPerson = service.create(personDTO);
         return ResponseEntity.ok(newPerson);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id){
+        service.delete(id);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }

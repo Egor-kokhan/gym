@@ -27,9 +27,5 @@ public class PersonDTO {
 
     private int age;
 
-    private String today;
-
-    private Set<GymnasticDTO> gymnastics;
-
     private List<VisitDTO> visits;
 }

@@ -2,68 +2,97 @@ package com.sportproject.gym.controller;
 
 import com.sportproject.gym.DTO.PersonDTO;
 import com.sportproject.gym.entity.Person;
-import com.sportproject.gym.service.PersonService;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.sportproject.gym.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Egor on 01.07.2020.
  */
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@TestPropertySource("/application.properties")
+@Sql(value = {"/create-person-before.sql"})
 class PersonControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    private PersonController controller;
 
     @Autowired
-    private PersonService service;
+    private PersonRepository repository;
 
     @Test
     void getAll() throws Exception {
-        String uri = "/person";
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
-                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+        ResponseEntity<List<PersonDTO>> responseEntity = controller.getAll();
+        List<PersonDTO> persons = responseEntity.getBody();
+        PersonDTO egor = new PersonDTO();
+        egor.setId(1);
+        egor.setFirstName("Егор");
+        egor.setLastName("Кохан");
+        egor.setAge(25);
 
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = mvcResult.getResponse().getContentAsString();
-        JSONArray jsonArray = new JSONArray(content);
-        JSONObject object = (JSONObject) jsonArray.get(0);
+        PersonDTO sasha = new PersonDTO();
+        sasha.setId(2);
+        sasha.setFirstName("Саша");
+        sasha.setLastName("Мягков");
+        sasha.setAge(24);
 
-        assertEquals(13, object.getInt("id"));
-
-    }
-
-    @Test
-    void delete() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.delete("/person/{id}"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(status().isAccepted());
+        assertNotNull(persons);
+        assertTrue(persons.contains(egor));
+        assertTrue(persons.contains(sasha));
     }
 
     @Test
     void create() throws Exception {
+        PersonDTO personForSave = new PersonDTO();
+        personForSave.setFirstName("Артур");
+        personForSave.setLastName("Мартиросян");
+        personForSave.setAge(45);
+
+        ResponseEntity<PersonDTO> responseEntity = controller.create(personForSave);
+        PersonDTO savedPerson = responseEntity.getBody();
+
+        assertNotNull(savedPerson);
+        assertNotEquals(0, savedPerson.getId());
+        assertEquals(personForSave.getFirstName(), savedPerson.getFirstName());
+        assertEquals(personForSave.getLastName(), savedPerson.getLastName());
+        assertEquals(personForSave.getAge(), savedPerson.getAge());
     }
 
     @Test
     void update() throws Exception {
+        PersonDTO personForUpdate = new PersonDTO();
+        personForUpdate.setId(1);
+        personForUpdate.setFirstName("Новый Егор");
+        personForUpdate.setLastName("Не Кохан");
+        personForUpdate.setAge(20);
+
+        ResponseEntity<PersonDTO> responseEntity = controller.update(personForUpdate);
+        PersonDTO updatedPerson = responseEntity.getBody();
+
+        assertNotNull(updatedPerson);
+        assertEquals(personForUpdate.getFirstName(), updatedPerson.getFirstName());
+        assertEquals(personForUpdate.getLastName(), updatedPerson.getLastName());
+        assertEquals(personForUpdate.getAge(), updatedPerson.getAge());
     }
+
+
+    @Test
+    void delete() throws Exception {
+        int sizeBeforeDeleting = repository.findAll().size();
+        ResponseEntity<?> delete = controller.delete(1);
+        int sizeAfterDeleting = repository.findAll().size();
+
+        assertTrue(delete.getStatusCode().is2xxSuccessful());
+        assertTrue(sizeBeforeDeleting > sizeAfterDeleting);
+    }
+
 }
