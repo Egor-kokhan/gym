@@ -10,13 +10,14 @@ import java.util.Set;
  * @author Egor on 12.05.2020.
  */
 @Data
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"id", "firstName", "lastName", "age"})
 @ToString(of = {"id", "firstName", "lastName", "age"})
 @Entity()
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "seq", sequenceName = "pesronSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =  "seq")
     private long id;
 
     @Column(name = "first_name", nullable = false)
