@@ -11,6 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,6 +66,14 @@ class PersonControllerTest {
         assertEquals(personForSave.getFirstName(), savedPerson.getFirstName());
         assertEquals(personForSave.getLastName(), savedPerson.getLastName());
         assertEquals(personForSave.getAge(), savedPerson.getAge());
+
+        Optional<Person> foundPerson = repository.findById(savedPerson.getId());
+        assertTrue(foundPerson.isPresent());
+
+        Person one = foundPerson.get();
+        assertEquals(personForSave.getFirstName(), one.getFirstName());
+        assertEquals(personForSave.getLastName(), one.getLastName());
+        assertEquals(personForSave.getAge(), one.getAge());
     }
 
     @Test
@@ -82,15 +91,25 @@ class PersonControllerTest {
         assertEquals(personForUpdate.getFirstName(), updatedPerson.getFirstName());
         assertEquals(personForUpdate.getLastName(), updatedPerson.getLastName());
         assertEquals(personForUpdate.getAge(), updatedPerson.getAge());
+
+        Optional<Person> foundPerson = repository.findById(personForUpdate.getId());
+        assertTrue(foundPerson.isPresent());
+
+        Person one = foundPerson.get();
+        assertEquals(personForUpdate.getFirstName(), one.getFirstName());
+        assertEquals(personForUpdate.getLastName(), one.getLastName());
+        assertEquals(personForUpdate.getAge(), one.getAge());
     }
 
 
     @Test
     void delete() throws Exception {
+        long deletedId = 1;
         int sizeBeforeDeleting = repository.findAll().size();
-        ResponseEntity<?> delete = controller.delete(1);
+        ResponseEntity<?> delete = controller.delete(deletedId);
         int sizeAfterDeleting = repository.findAll().size();
 
+        assertFalse(repository.existsById(deletedId));
         assertTrue(delete.getStatusCode().is2xxSuccessful());
         assertTrue(sizeBeforeDeleting > sizeAfterDeleting);
     }
