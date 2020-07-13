@@ -11,13 +11,14 @@ import java.util.Date;
  * @author Alex on 04.06.2020.
  */
 @Data
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"id", "creationDateTime"})
 @ToString(of = {"id", "creationDateTime"})
 @Entity()
 public class Visit {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    @SequenceGenerator(name = "visitSeq", sequenceName = "visit_seq")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "visitSeq")
+    private Long id;
 
     @Column (nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -28,4 +29,7 @@ public class Visit {
     @JoinColumn(name="person_id")
     private Person person;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "training_id", nullable = false)
+    private Training training;
 }

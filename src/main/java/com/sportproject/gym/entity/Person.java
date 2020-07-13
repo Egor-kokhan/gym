@@ -1,10 +1,11 @@
 package com.sportproject.gym.entity;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Egor on 12.05.2020.
@@ -16,9 +17,9 @@ import java.util.Set;
 public class Person {
 
     @Id
-    @SequenceGenerator(name = "seq", sequenceName = "pesronSeq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =  "seq")
-    private long id;
+    @SequenceGenerator(name = "personSeq", sequenceName = "pesron_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =  "personSeq")
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
