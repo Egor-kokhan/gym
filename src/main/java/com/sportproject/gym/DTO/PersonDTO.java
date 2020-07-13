@@ -16,6 +16,7 @@ import java.util.Set;
  * @author Egor on 18.05.2020.
  */
 @Data
+@ToString(of = {"id", "firstName", "lastName", "age"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
 
