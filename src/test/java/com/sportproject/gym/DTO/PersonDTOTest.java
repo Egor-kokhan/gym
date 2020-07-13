@@ -25,7 +25,7 @@ class PersonDTOTest {
     @Test
     public void testToDto() {
         Person person = new Person();
-        person.setId(1);
+        person.setId(1L);
         person.setFirstName("Егор");
         person.setLastName("Кохан");
         person.setAge(25);
@@ -44,7 +44,7 @@ class PersonDTOTest {
     @Test
     public void testToEntity() {
         PersonDTO personDto = new PersonDTO();
-        personDto.setId(1);
+        personDto.setId(1L);
         personDto.setFirstName("Егор");
         personDto.setLastName("Кохан");
         personDto.setAge(25);

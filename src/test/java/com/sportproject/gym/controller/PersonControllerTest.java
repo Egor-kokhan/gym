@@ -31,19 +31,19 @@ class PersonControllerTest {
     private PersonRepository repository;
 
     @Test
-    void getAll() throws Exception {
+    void getAll() {
         ResponseEntity<List<PersonDTO>> responseEntity = controller.getAll();
         List<PersonDTO> persons = responseEntity.getBody();
         PersonDTO egor = new PersonDTO();
-        egor.setId(1);
-        egor.setFirstName("Егор");
-        egor.setLastName("Кохан");
+        egor.setId(1L);
+        egor.setFirstName("Egor");
+        egor.setLastName("Kohan");
         egor.setAge(25);
 
         PersonDTO sasha = new PersonDTO();
-        sasha.setId(2);
-        sasha.setFirstName("Саша");
-        sasha.setLastName("Мягков");
+        sasha.setId(2L);
+        sasha.setFirstName("Sasha");
+        sasha.setLastName("Myagkov");
         sasha.setAge(24);
 
         assertNotNull(persons);
@@ -52,7 +52,7 @@ class PersonControllerTest {
     }
 
     @Test
-    void create() throws Exception {
+    void create() {
         PersonDTO personForSave = new PersonDTO();
         personForSave.setFirstName("Артур");
         personForSave.setLastName("Мартиросян");
@@ -77,9 +77,9 @@ class PersonControllerTest {
     }
 
     @Test
-    void update() throws Exception {
+    void update() {
         PersonDTO personForUpdate = new PersonDTO();
-        personForUpdate.setId(1);
+        personForUpdate.setId(1L);
         personForUpdate.setFirstName("Новый Егор");
         personForUpdate.setLastName("Не Кохан");
         personForUpdate.setAge(20);
@@ -103,7 +103,7 @@ class PersonControllerTest {
 
 
     @Test
-    void delete() throws Exception {
+    void delete() {
         long deletedId = 1;
         int sizeBeforeDeleting = repository.findAll().size();
         ResponseEntity<?> delete = controller.delete(deletedId);
