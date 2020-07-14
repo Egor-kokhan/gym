@@ -1,44 +1,51 @@
 package com.sportproject.gym.DTO;
 
 import com.sportproject.gym.entity.Person;
+import com.sportproject.gym.entity.SetEntity;
+import com.sportproject.gym.entity.Training;
 import com.sportproject.gym.entity.Visit;
 import com.sportproject.gym.mapper.CommonMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- * @author Egor on 01.07.2020.
+ * @author Egor on 14.07.2020.
  */
 @SpringBootTest
-class PersonDTOTest {
+public class SetEntityDTOTest {
 
     @Autowired
     private CommonMapper mapper;
 
     @Test
     public void testToDto() {
-        Person person = new Person();
-        person.setId(1L);
-        person.setFirstName("Егор");
-        person.setLastName("Кохан");
-        person.setAge(25);
-        List<Visit> visits = Collections.singletonList(new Visit());
-        person.setVisits(visits);
+        SetEntity set = new SetEntity();
+        set.setId(1L);
+        set.setRepeats(4);
+        set.setWeight(34);
 
-        PersonDTO personDto = mapper.personToPersonDTO(person);
+        Visit visit = new Visit();
+        visit.setId(1L);
+        visit.setCreationDateTime(new Date());
+        visit.setPerson(new Person());
+        visit.setTraining(new Training());
+        
+        set.setVisit(visit);
 
-        assertEquals(person.getId(), personDto.getId());
-        assertEquals(person.getFirstName(), personDto.getFirstName());
-        assertEquals(person.getLastName(), personDto.getLastName());
-        assertEquals(person.getAge(), personDto.getAge());
-        assertNull(personDto.getVisits());
+        SetEntityDTO setDto = mapper.setEntityToSetEntityDto(set);
+
+
+        assertEquals(set.getId(), setDto.getId());
+        assertEquals(set.getRepeats(), setDto.getRepeats());
+        assertEquals(set.getWeight(), setDto.getWeight());
+        assertEquals(set.getVisit().getId(), setDto.getVisit().getId());
+//        assertNull(personDto.getVisits());
     }
 
     @Test
@@ -57,5 +64,6 @@ class PersonDTOTest {
         assertEquals(personDto.getAge(), person.getAge());
         assertNull(person.getVisits());
     }
-
+    
+    
 }
