@@ -1,6 +1,8 @@
 package com.sportproject.gym.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -8,11 +10,15 @@ import javax.persistence.*;
  * @author Alex on 27.05.2020.
  */
 @Data
+@EqualsAndHashCode(of = {"id", "repeats", "weight"})
+@ToString(of = {"id", "repeats", "weight"})
 @Entity()
 public class SetEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @SequenceGenerator(name = "SetEntitySeq", sequenceName = "set_entity_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =  "SetEntitySeq")
+    private Long id;
 
     @Column (nullable = false)
     private int repeats;
@@ -20,11 +26,9 @@ public class SetEntity {
     @Column (nullable = false)
     private double weight;
 
-    @Column (name = "VISIT_ID", nullable = false)
-    private long visitId;
 
-    @Column (name = "GYMNASTIC_ID", nullable = false)
-    private long gymnasticId;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "visit_id", nullable = false)
+    private Visit visit;
 
 }
