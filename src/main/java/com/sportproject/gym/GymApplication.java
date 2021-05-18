@@ -11,6 +11,7 @@ public class GymApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GymApplication.class, args);
 		//Плохой коммит
+		//Еще один плохой комми
 	}
 
 }
